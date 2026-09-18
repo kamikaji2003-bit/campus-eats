@@ -1,3 +1,16 @@
+require('dotenv').config();
+
+const pool = require('./config/db');
+
+pool.query('SELECT NOW()', (err, result) => {
+    if (err) {
+        console.error('❌ Database connection failed:', err.message);
+    } else {
+        console.log('✅ Database connected!');
+        console.log(result.rows);
+    }
+});
+
 const express = require('express');
 const path = require('path');
 const dotenv = require('dotenv');

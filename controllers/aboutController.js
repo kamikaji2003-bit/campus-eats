@@ -1,5 +1,3 @@
-const Restaurant = require('../models/Restaurant');
-exports.getHome = async (req, res) => {
- const restaurants = await Restaurant.getAllRestaurants();
- res.render('index', { title: 'Campus Eats', restaurants });
+exports.getAbout = (req, res) => {
+  res.render('about', { title: 'About Us' });
 };
