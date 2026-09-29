@@ -7,35 +7,76 @@
 </section>
 
 <section class="restaurants">
-  <section class="stats-bar">
- <p><strong><%= stats.total_orders %></strong> orders placed · Nu. <strong><%=
-stats.total_revenue %></strong> in sales</p>
-</section>
-<% if (popularItems.length > 0) { %>
- <section class="popular">
- <h2>Popular Right Now</h2>
- <div class="popular-grid">
- <% popularItems.forEach(item => { %>
- <div class="popular-item">
- <h3><%= item.name %></h3>
- <span class="rating-pill"><%= item.times_ordered %> ordered</span>
- </div>
- <% }); %>
- </div>
- </section>
- 
   <h2>Popular Restaurants</h2>
+
   <div class="restaurant-grid">
     <% restaurants.forEach(r => { %>
+
       <div class="restaurant-card">
-        <div class="avatar"><%= r.name.charAt(0) %></div>
+
+        <div class="avatar">
+          <%= r.name.charAt(0) %>
+        </div>
+
         <h3><%= r.name %></h3>
+
         <p><%= r.cuisine %></p>
-        <span class="rating-pill">★ <%= r.rating %></span>
-        <a href="/restaurants/<%= r.id %>/menu" class="btn">View Menu</a>
+
+        <span class="rating-pill">
+          ★ <%= r.rating %>
+        </span>
+
+        <a href="/restaurants/<%= r.id %>/menu" class="btn">
+          View Menu
+        </a>
+
       </div>
+
     <% }); %>
   </div>
+</section>
+
+<section class="stats-bar">
+
+  <div>
+    <strong><%= stats.total_orders %></strong>
+    <span>Total Orders</span>
+  </div>
+
+  <div>
+    <strong>Nu. <%= stats.total_revenue %></strong>
+    <span>Total Revenue</span>
+  </div>
+
+</section>
+
+<section class="popular">
+
+  <h2>Popular Items</h2>
+
+  <div class="popular-grid">
+
+    <% if (popularItems && popularItems.length > 0) { %>
+
+      <% popularItems.forEach(item => { %>
+
+        <div class="popular-item">
+          <h3><%= item.name %></h3>
+          <p>
+            Ordered <%= item.times_ordered %> times
+          </p>
+        </div>
+
+      <% }); %>
+
+    <% } else { %>
+
+      <p>No orders yet.</p>
+
+    <% } %>
+
+  </div>
+
 </section>
 
 <%- include('partials/footer') %>

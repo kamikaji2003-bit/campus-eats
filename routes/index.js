@@ -1,21 +1,22 @@
 const express = require('express');
 const router = express.Router();
+
 const homeController = require('../controllers/homeController');
 const aboutController = require('../controllers/aboutController');
 const menuController = require('../controllers/menuController');
 const orderController = require('../controllers/orderController');
 
-// --- ADD THESE LOGS TO DEBUG ---
-console.log("createOrder:", typeof orderController.createOrder);
-console.log("getMenuByRestaurant:", typeof menuController.getMenuByRestaurant);
-console.log("getHome:", typeof homeController.getHome);
-console.log("getAbout:", typeof aboutController.getAbout);
-
-router.post('/orders', orderController.createOrder);
-router.get('/orders/:id', orderController.getOrder);
-
-router.get('/restaurants/:id/menu', menuController.getMenuByRestaurant);
+// Home & About routes
 router.get('/', homeController.getHome);
 router.get('/about', aboutController.getAbout);
+
+// Restaurant & Menu routes
+router.get('/restaurants/:id/menu', menuController.getMenuByRestaurant);
+
+// Order routes
+router.post('/orders', orderController.createOrder);
+router.get('/orders/:id', orderController.getOrder);
+router.post('/orders/:id/update', orderController.updateOrder);
+router.post('/orders/:id/cancel', orderController.cancelOrder);
 
 module.exports = router;

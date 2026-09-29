@@ -1,39 +1,37 @@
-require('dotenv').config();
-
-const pool = require('./config/db');
-
-pool.query('SELECT NOW()', (err, result) => {
-    if (err) {
-        console.error('❌ Database connection failed:', err.message);
-    } else {
-        console.log('✅ Database connected!');
-        console.log(result.rows);
-    }
-});
-
-const express = require('express');
 const path = require('path');
 const dotenv = require('dotenv');
+const express = require('express');
+
 dotenv.config();
+
 const app = express();
 const PORT = process.env.PORT || 3000;
+const db = require('./config/db');
+const indexRoutes = require('./routes/index');
 
 // View engine
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-// Static files (CSS, client-side JS)
+// Middleware
 app.use(express.static(path.join(__dirname, 'public')));
-
 app.use(express.urlencoded({ extended: true }));
-// Routes
-const indexRoutes = require('./routes/index');
-app.use('/', indexRoutes);
+app.use(express.json());
 
-const db = require('./config/db');
+// Routes
+app.use('/', indexRoutes);
+const apiRoutes = require('./routes/api');
+app.use('/api', apiRoutes);
+
+// Database Test Route (uses pg-promise)
 app.get('/db-test', async (req, res) => {
- const result = await db.one('SELECT NOW() AS current_time');
- res.json(result);
+  try {
+    const result = await db.one('SELECT NOW() AS current_time');
+    res.json(result);
+  } catch (error) {
+    console.error('Database query error:', error);
+    res.status(500).json({ error: 'Database query failed' });
+  }
 });
 
 app.listen(PORT, () => {
