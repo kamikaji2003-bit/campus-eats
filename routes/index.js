@@ -12,6 +12,8 @@ console.log("getHome:", typeof homeController.getHome);
 console.log("getAbout:", typeof aboutController.getAbout);
 
 router.post('/orders', orderController.createOrder);
+router.get('/orders/:id', orderController.getOrder);
+
 router.get('/restaurants/:id/menu', menuController.getMenuByRestaurant);
 router.get('/', homeController.getHome);
 router.get('/about', aboutController.getAbout);
