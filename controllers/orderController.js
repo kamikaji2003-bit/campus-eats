@@ -2,20 +2,26 @@ const Order = require('../models/Order');
 const MenuItem = require('../models/MenuItem');
 
 exports.createOrder = async (req, res) => {
-  try {
+
     const { itemId } = req.body;
-    const item = await MenuItem.getMenuItemById(itemId);
+
+    const item =
+        await MenuItem.getMenuItemById(itemId);
 
     if (!item) {
-      return res.status(400).send('Invalid menu item.');
+        return res
+            .status(400)
+            .send('Invalid menu item.');
     }
 
-    const order = await Order.createOrder(item.id, item.price);
+    const order =
+        await Order.createOrder(
+            item.id,
+            item.price,
+            req.session.user.id
+        );
+
     res.redirect(`/orders/${order.id}`);
-  } catch (error) {
-    console.error('Error creating order:', error);
-    res.status(500).send('Error processing order.');
-  }
 };
 
 exports.getOrder = async (req, res) => {

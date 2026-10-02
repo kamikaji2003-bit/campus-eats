@@ -1,3 +1,4 @@
+const session = require('express-session');
 const path = require('path');
 const dotenv = require('dotenv');
 const express = require('express');
@@ -17,6 +18,17 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+app.use(session({
+    secret: process.env.SESSION_SECRET || 'campus-eats-dev-secret',
+    resave: false,
+    saveUninitialized: false
+}));
+
+app.use((req, res, next) => {
+    res.locals.user = req.session.user || null;
+    next();
+});
 
 // Routes
 app.use('/', indexRoutes);

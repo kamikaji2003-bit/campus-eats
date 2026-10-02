@@ -213,3 +213,137 @@ main {
   justify-content: center;
   margin: 0 auto 20px;
 }
+quantity-form {
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ gap: 10px;
+ margin: 16px 0;
+}
+.quantity-form input {
+ width: 60px;
+ padding: 8px;
+ border-radius: 8px;
+ border: 1px solid var(--border);
+ text-align: center;
+font-family: inherit;
+}
+.btn-secondary {
+ background: #f1f1f1;
+ color: var(--text);
+ box-shadow: none;
+}
+.btn-danger {
+ background: #e63946;
+ margin-top: 8px;
+}
+
+stats-bar {
+ text-align: center;
+ color: var(--text-muted);
+ font-size: 0.95rem;
+ margin-bottom: 8px;
+}
+.popular {
+ padding: 20px 0 10px;
+}
+.popular h2 {
+ text-align: center;
+ font-size: 1.4rem;
+ font-weight: 700;
+ margin-bottom: 8px;
+}
+.popular-grid {
+ display: flex;
+ flex-wrap: wrap;
+ justify-content: center;
+ gap: 16px;
+ margin-top: 16px;
+}
+popular-item {
+ background: var(--surface);
+ border-radius: var(--radius);
+ padding: 16px 20px;
+ text-align: center;
+ box-shadow: var(--shadow);
+}
+.popular-item h3 {
+ margin: 0 0 8px;
+ font-size: 1rem;
+}
+
+.auth-form {
+    max-width: 380px;
+    margin: 40px auto;
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 40px 32px;
+    box-shadow: var(--shadow);
+    text-align: center;
+}
+
+.auth-form h1 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin: 0 0 8px;
+}
+
+.auth-form .form-hint {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin: 0 0 24px;
+}
+
+.auth-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.auth-form input {
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    font-family: inherit;
+    font-size: 0.95rem;
+}
+
+.auth-form input:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.auth-form button {
+    margin-top: 8px;
+    padding: 12px;
+    border: none;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--primary), #ff8a5c);
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+}
+
+.auth-form p {
+    margin: 16px 0 0;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.auth-form p a {
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.error {
+    background-color: #fdecea;
+    color: #c0392b;
+    border: 1px solid #f5c6cb;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin: 0 0 16px;
+}
