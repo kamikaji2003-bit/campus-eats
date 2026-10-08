@@ -1,9 +1,8 @@
 const crypto = require('crypto');
-
 const User = require('../models/User');
-
 const {
-    sendVerificationEmail
+    sendVerificationEmail,
+    sendPasswordResetEmail
 } = require('../config/mailer');
 
 const EMAIL_SUFFIX = '.sherubtse@rub.edu.bt';
@@ -16,7 +15,6 @@ exports.showSignup = (req, res) => {
 };
 
 exports.signup = async (req, res) => {
-
     const { name, email, password } = req.body;
 
     if (!name || !email || !password) {
@@ -64,7 +62,6 @@ exports.signup = async (req, res) => {
 };
 
 exports.verifyEmail = async (req, res) => {
-
     const user =
         await User.markVerified(req.params.token);
 
@@ -88,7 +85,6 @@ exports.showLogin = (req, res) => {
 };
 
 exports.login = async (req, res) => {
-
     const { email, password } = req.body;
 
     const user =
@@ -138,11 +134,6 @@ exports.logout = (req, res) => {
     });
 };
 
-const {
-    sendVerificationEmail,
-    sendPasswordResetEmail
-} = require('../config/mailer');
-
 exports.showForgotPassword = (req, res) =>
     res.render('forgot-password', {
         title: 'Forgot Password',
@@ -150,14 +141,12 @@ exports.showForgotPassword = (req, res) =>
     });
 
 exports.forgotPassword = async (req, res) => {
-
     const { email } = req.body;
 
     const user =
         await User.findByEmail(email);
 
     if (user) {
-
         const token =
             crypto.randomBytes(20).toString('hex');
 
@@ -186,7 +175,6 @@ exports.forgotPassword = async (req, res) => {
 };
 
 exports.showResetPassword = async (req, res) => {
-
     const user =
         await User.findByResetToken(
             req.params.token
@@ -208,7 +196,6 @@ exports.showResetPassword = async (req, res) => {
 };
 
 exports.resetPassword = async (req, res) => {
-
     const {
         password,
         confirmPassword
